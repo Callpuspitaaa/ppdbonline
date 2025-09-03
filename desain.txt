@@ -1,0 +1,70 @@
+1. Struktur Database (ppdbonline)
+Walaupun tidak menuliskan query SQL, secara garis besar tabel-tabel inti yang dibutuhkan:
+•	Tabel CalonSiswa
+o	id_pendaftaran, no_pendaftaran, nama_lengkap, NISN, asal_sekolah, alamat, jalur_pendaftaran, nilai_rapot, prestasi_nonakademik, bukti_afirmasi (KIP), status_pendaftaran (diterima/ditolak/proses).
+•	Tabel Admin
+o	id_admin, username, password.
+•	Tabel Pengumuman
+o	id_pengumuman, no_pendaftaran, status, keterangan.
+•	Tabel JurnalPendaftar
+o	id_jurnal, no_pendaftaran, nama, nilai_total, ranking, jalur.
+________________________________________
+2. Halaman Frontend (untuk Calon Siswa)
+📌 Bagian ini diakses oleh masyarakat umum, khususnya calon siswa SMP Negeri 1 Bawang.
+a. Halaman Beranda
+•	Informasi umum tentang PPDB SMP Negeri 1 Bawang.
+•	Jadwal pendaftaran.
+•	Persyaratan berdasarkan jalur (Prestasi Akademik, Prestasi Nonakademik, Afirmasi).
+•	Tombol Daftar Sekarang.
+b. Formulir Pendaftaran Online
+•	Input data siswa: Nama lengkap, NISN, asal sekolah, alamat.
+•	Pilihan jalur pendaftaran:
+o	Prestasi Akademik (nilai rapot, upload scan nilai).
+o	Prestasi Nonakademik (upload sertifikat juara lomba).
+o	Afirmasi (upload foto KIP).
+•	Upload dokumen pendukung.
+•	Sistem otomatis menghasilkan Nomor Pendaftaran setelah submit.
+c. Halaman Cek Pengumuman
+•	Input Nomor Pendaftaran.
+•	Hasil:
+o	Jika Diterima → pesan selamat + arahan daftar ulang.
+o	Jika Ditolak → pesan penolakan + informasi jalur alternatif (misalnya bisa daftar di sekolah lain sesuai aturan zonasi).
+________________________________________
+3. Halaman Backend (untuk Admin Sekolah)
+📌 Bagian ini hanya bisa diakses oleh panitia/admin PPDB SMP Negeri 1 Bawang.
+a. Dashboard Admin
+•	Ringkasan jumlah pendaftar.
+•	Grafik/statistik jalur pendaftaran.
+•	Status siswa diterima/ditolak.
+b. Manajemen Pendaftar
+•	Daftar Pendaftar → tampilkan semua calon siswa + filter berdasarkan jalur.
+•	Detail Siswa → melihat data lengkap + dokumen yang diupload.
+•	Aksi Admin:
+o	Terima siswa.
+o	Tolak siswa.
+o	Update data jika ada kesalahan input.
+c. Pengumuman Hasil
+•	Admin mengatur status diterima/ditolak untuk tiap nomor pendaftaran.
+•	Data otomatis muncul di halaman Pengumuman (frontend).
+d. Jurnal Pendaftar (Ranking Nilai)
+•	Menampilkan daftar siswa berdasarkan:
+o	Jalur Prestasi Akademik → urut dari nilai rapot tertinggi.
+o	Jalur Prestasi Nonakademik → urut berdasarkan tingkat kejuaraan (misalnya juara nasional lebih tinggi dari provinsi, dst.).
+o	Jalur Afirmasi → verifikasi kepemilikan KIP.
+•	Jurnal ini menjadi arsip resmi sekolah untuk dasar penerimaan.
+________________________________________
+4. Alur Proses PPDB Online
+1.	Calon siswa membuka website → membaca syarat → mengisi formulir → mendapatkan nomor pendaftaran.
+2.	Admin memverifikasi → menentukan diterima/ditolak → hasil tersimpan.
+3.	Calon siswa membuka menu pengumuman → memasukkan nomor pendaftaran → melihat hasil.
+4.	Admin dapat mencetak/ekspor jurnal pendaftar berdasarkan ranking untuk laporan ke Dinas Pendidikan.
+________________________________________
+5. Tampilan Desain (Konsep UI/UX)
+•	Warna utama: biru & putih (identik dengan sekolah).
+•	Frontend:
+o	Tampilan sederhana, fokus ke formulir dan pengumuman.
+o	Navigasi: Beranda | Daftar | Cek Pengumuman | Panduan.
+•	Backend:
+o	Dashboard dengan menu samping (sidebar).
+o	Menu: Dashboard | Data Pendaftar | Jurnal Ranking | Pengumuman | Logout.
+
